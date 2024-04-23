@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Online Retail Application</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #ffffff, #ddc766);
+        overflow-y: auto;
+      }
+
+      ::-webkit-scrollbar {
+    width: 15px; 
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 10px;
+    border: 3px solid black; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: black; 
+}
+
+      nav {
+        background-color: #588df7;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        color: #ffffff;
+        border-radius: 5px;
+        border-bottom: 3px solid rgb(7, 7, 7);
+        font-weight: bold;
+      }
+
+      .logo {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #8f00fc;
+        letter-spacing: 2px;
+        background-color: white;
+        padding: 5px;
+        border-radius: 5px;
+        border-top: 2px solid rgb(0, 0, 0);
+        border-right: 2px solid black;
+        display: block; /* Ensure logo is initially displayed */
+      }
+
+      .fa-cart-shopping::before {
+        content: "\f07a";
+        font-family: "Font Awesome 5 Free";
+        margin-right: 10px;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-links li {
+        margin-right: 20px;
+      }
+
+      .nav-links li a {
+        color: #ffffff;
+        text-decoration: none;
+        margin: 5px;
+      }
+
+      .burger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .line1,
+      .line2,
+      .line3 {
+        width: 25px;
+        height: 3px;
+        background-color: #ffffff;
+        margin: 3px;
+      }
+
+      .nav-links li:not(#search):not(.login-box):hover {
+        background-color: #f5f2f1;
+        transition: background-color 0.3s ease;
+        border-radius: 7px;
+      }
+
+      .nav-links li:not(#search):not(.login-box) a {
+        display: block;
+        padding: 1px 2px;
+        color: #333;
+        text-decoration: none;
+      }
+
+      .nav-links li:not(#search):not(.login-box) a:hover {
+        color: #ff6600;
+      }
+
+      main {
+        min-height: calc(100vh - 150px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #imageContainer {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        height: 600px;
+        padding-top: 0px;
+        margin-bottom: 25px;
+        border-bottom: 2px solid rgb(0, 0, 0);
+      }
+
+      #imageContainer img {
+        position: absolute;
+        width: 100%;
+        height: auto;
+        opacity: 0;
+        transition: opacity 1s ease;
+      }
+      #imageContainer img.active {
+        opacity: 1;
+      }
+
+      #text {
+        background-color: #f0f0f0;
+        border: 2px solid black;
+        border-radius: 5px;
+        margin-top: 0px;
+        margin-bottom: 20px;
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      footer {
+        background-color: #333;
+        color: #fff;
+        padding: 2rem 0;
+        text-align: center;
+        margin-top: 20px;
+        border-top: 2px solid black;
+      }
+
+      .footer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .footer-container h4 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
+
+      .content_1,
+      .content_2,
+      .content_3 {
+        flex-basis: 100%;
+        margin-bottom: 2rem;
+      }
+
+      .social-media-icons {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+
+      .social-media-icons img {
+        width: 30px;
+        margin: 0 5px;
+      }
+
+      .content_3 ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .content_3 ul li {
+        margin-bottom: 0.5rem;
+      }
+
+      .content_3 ul li a {
+        color: #ccc;
+        text-decoration: none;
+      }
+
+      .content_3 ul li a:hover {
+        color: #fff;
+      }
+
+      @media only screen and (min-width: 768px) {
+        .footer-container {
+          justify-content: space-between;
+        }
+
+        .content_1,
+        .content_2,
+        .content_3 {
+          flex-basis: 30%;
+        }
+      }
+
+      .login-box {
+        background-color: green;
+        padding: 10px 20px;
+        border-radius: 5px;
+      }
+
+      .product-box {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .product:hover {
+  background-color: #b8e865; 
+  transform: translateY(-5px); 
+}
+
+      .product {
+        width: calc(50% - 20px);
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        padding: 10px;
+        border-top: 2px solid rgb(0, 0, 0);
+        border-right: 2px solid black;
+        margin-bottom: 5px;
+      }
+
+      .product img {
+        width: 690px;
+        height: 270px;
+        object-fit: cover;
+        border-radius: 5px;
+        border: 1px solid black;
+      }
+
+      @media screen and (max-width: 768px) {
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+        }
+
+        .product img {
+          width: 100%;
+          height: auto;
+        }
+
+        .product {
+          width: calc(50% - 7px);
+        }
+
+        .product-box {
+          gap: 7px;
+          margin-left: 10px;
+          margin-right: 10px;
+          padding: 10px;
+        }
+
+        .logo {
+          font-size: 1.4rem;
+          padding: 3px;
+          border-top: 1px solid rgb(0, 0, 0);
+          border-right: none;
+        }
+
+        .fa-cart-shopping::before {
+          margin-right: 5px;
+        }
+
+        .nav-links li:not(#search):not(.login-box) a {
+          display: block;
+          padding: 1px 2px;
+          color: #000000;
+          font-weight: bold;
+          text-decoration: none;
+          margin: 0px;
+        }
+
+        .nav-links li:not(#search):not(.login-box):hover {
+          background-color: #f5f2f1;
+          transition: background-color 0.3s ease;
+          border-radius: 7px;
+          padding: 5px;
+        }
+
+        @media screen and (max-width: 768px) {
+          #imageContainer {
+            height: 200px;
+            margin-bottom: 30px;
+          }
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .nav-links li {
+          margin: 10px 0;
+        }
+
+        .burger {
+          display: flex;
+        }
+
+        .burger.active .line1 {
+          transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .burger.active .line2 {
+          opacity: 0;
+        }
+
+        .burger.active .line3 {
+          transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .product {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo fa-solid fa-cart-shopping">NearBySell</div>
+        <ul class="nav-links">
+
+          <li><a href="product.php">  <img
+            src="https://cdn.hugeicons.com/icons/search-01-stroke-rounded.svg"
+            alt="search-01"
+            width="24"
+            height="24"
+          /></a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="service.html">Services</a></li>
+          <li><a href="Ourteam.html">Our Team</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+          <li>
+            <a href="game.html"><i class="fa-solid fa-gamepad"></i> Games</a
+            >
+          </li>
+          <li>
+            <a href="giftcard.html"><i class="fa-solid fa-gift"></i> Gift Card</a
+            >
+          </li>
+          <li class="login-box">
+            <a href="SignIn.html">Sign In</a>
+          </li>
+          </li>
+          <li class="login-box">
+            <a href="account.php">Account</a>
+          </li>
+        </ul>
+        <div class="burger">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div id="imageContainer">
+        <img src="1.jpg" class="active" />
+        <img src="2.jpg" />
+        <img src="3.jpg" />
+        <img src="4.jpg" />
+      </div>
+      <div id="text">Some popular products</div>
+      <div class="product-box">
+        <div class="product">
+          <img src="milk.webp" alt="Product 1" height="200px" />
+          <h3>Milk</h3>
+          <p>
+            Fresh dairy product sourced locally, essential for a balanced diet.
+          </p>
+        </div>
+        <div class="product">
+          <img src="flat-for-rent.jpg" alt="Product 2" />
+          <h3>Flat-for-rent</h3>
+          <p>
+            Spacious, well-furnished rental flat in prime location, perfect for
+            urban living.
+          </p>
+        </div>
+        <div class="product">
+          <img src="mobile.jpg" alt="Product 3" />
+          <h3>Mobile</h3>
+          <p>
+            Latest smartphone model with advanced features, ideal for
+            communication and productivity.
+          </p>
+        </div>
+        <div class="product">
+          <img src="laptop.jpg" alt="Product 4" />
+          <h3>Laptop</h3>
+          <p>
+            High-performance laptop for work or entertainment, sleek design and
+            powerful functionality.
+          </p>
+        </div>
+        <div class="product">
+          <img src="bike.webp" alt="Product 5" />
+          <h3>Bike</h3>
+          <p>
+            Stylish and durable bicycle for commuting or leisure rides,
+            eco-friendly transportation solution.
+          </p>
+        </div>
+        <div class="product">
+          <img src="Mess.jpg" alt="Product 6" />
+          <h3>Mess</h3>
+          <p>
+            Nutritious and delicious home-cooked meals, convenient and
+            affordable dining option.
+          </p>
+        </div>
+        <div class="product">
+          <img src="book.avif" alt="Product 7" />
+          <h3>Books</h3>
+          <p>
+            Wide selection of captivating books for all ages, fuel your
+            imagination and knowledge.
+          </p>
+        </div>
+        <div class="product">
+          <img src="spices.avif" alt="Product 8" />
+          <h3>Spices</h3>
+          <p>
+            Premium quality spices to enhance flavor in your culinary creations,
+            sourced from trusted suppliers.
+          </p>
+        </div>
+        <div class="product">
+          <img src="Vegetables.jpeg" alt="Product 9" />
+          <h3>Vegetables</h3>
+          <p>
+            Fresh, locally grown vegetables packed with nutrients, essential for
+            a healthy lifestyle.
+          </p>
+        </div>
+        <div class="product">
+          <img src="Plants.jpg" alt="Product 10" />
+          <h3>Plants</h3>
+          <p>
+            Vibrant indoor and outdoor plants to add greenery and serenity to
+            your living spaces.
+          </p>
+        </div>
+        <div class="product">
+          <img src="water.jpg" alt="Product 10" />
+          <h3>Water</h3>
+          <p>
+            Refreshing and pure hydration source, essential for staying hydrated
+            and maintaining overall health. Crisp, clean taste for every sip.
+          </p>
+        </div>
+        <div class="product">
+          <img src="aachar_papad.jpg" alt="Product 10" />
+          <h3>Aachar-Papad</h3>
+          <p>
+            Vibrant flavors of traditional Indian spices infused in tangy
+            pickles and crispy papads. Perfect accompaniments for a delightful
+            meal experience.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="section-footer">
+      <div class="footer-container container">
+        <div class="content_1">
+          <h4>Contact Us</h4>
+          <p>Email: vsc251044@gmail.com</p>
+          <p>Phone: +91 8010045390</p>
+          <p>Address: Kolhapur, 416234</p>
+        </div>
+        <div class="content_2">
+          <h4>Follow Us</h4>
+          <div class="social-media-icons">
+            <a
+              href="https://www.instagram.com/vishalchavan3923?igsh=dHVybDhrMHRncmpk"
+              ><img
+                src="https://cdn.hugeicons.com/icons/instagram-stroke-rounded.svg"
+                alt="instagram"
+                width="24"
+                height="24"
+            /></a>
+            <a
+              href="https://www.facebook.com/profile.php?id=100073061940487&mibextid=ZbWKwL"
+              ><img
+                src="https://cdn.hugeicons.com/icons/facebook-01-stroke-rounded.svg"
+                alt="facebook-01"
+                width="24"
+                height="24"
+            /></a>
+            <a href="linkedin.com/in/vishal-chavan-498b67262"
+              ><img
+                src="https://cdn.hugeicons.com/icons/linkedin-01-stroke-rounded.svg"
+                alt="linkedin-01"
+                width="24"
+                height="24"
+            /></a>
+            <a href="twitter.com/Vishal701567003?s=09"
+              ><img
+                src="https://cdn.hugeicons.com/icons/new-twitter-stroke-rounded.svg"
+                alt="new-twitter"
+                width="24"
+                height="24"
+            /></a>
+          </div>
+        </div>
+        <div class="content_3">
+          <h4>Our Services</h4>
+          <ul>
+            <li><p>Seller-Customer Interaction</p></li>
+            <li><p>Security</p></li>
+            <li><p>Profit Maximization</p></li>
+            <li><p>Business Improvement</p></li>
+            <li><p>Social Media Integration</p></li>
+            <li><p>Feedback Mechanisms</p></li>
+          </ul>
+        </div>
+      </div>
+      <div class="f-design">
+        <div class="f-design-txt">
+          <p>&copy; 2024 SellEase. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      window.addEventListener("DOMContentLoaded", (event) => {
+        const images = document.querySelectorAll("#imageContainer img");
+        let index = 0;
+
+        setInterval(() => {
+          images[index].classList.remove("active");
+          index = (index + 1) % images.length;
+          images[index].classList.add("active");
+        }, 2000);
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const burger = document.querySelector(".burger");
+        const navLinks = document.querySelector(".nav-links");
+        const logo = document.querySelector(".logo");
+
+        burger.addEventListener("click", function () {
+          navLinks.classList.toggle("active");
+          burger.classList.toggle("active");
+
+          logo.style.display = logo.style.display === "none" ? "block" : "none";
+        });
+      });
+    </script>
+  </body>
+</html>

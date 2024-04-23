@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Services Section</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body{
+        background: linear-gradient(to right, #fffdfd, #5cd7dd);
+      }
+      .navbar {
+        background-color: #00caf7;
+        color: #fff;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid black;
+        margin-bottom: 10px;
+      }
+      .navbar h1 {
+        font-size: 24px;
+      }
+      .navbar i {
+        font-size: 24px;
+        margin-right: 10px;
+      }
+      section {
+        height: 100vh;
+        width: 100%;
+        display: grid;
+        place-items: center;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .column {
+        width: 100%;
+        padding: 0 1em 1em 1em;
+        text-align: center;
+      }
+      .card {
+        width: 100%;
+        height: 100%;
+        padding: 2em 1.5em;
+        background: linear-gradient(#ffffff 50%, #2c7bfe 50%);
+        background-size: 100% 200%;
+        background-position: 0 2.5%;
+        border-radius: 5px;
+        box-shadow: 0 0 35px rgba(0, 0, 0, 0.12);
+        cursor: pointer;
+        transition: 0.5s;
+        border-bottom: 2px solid black;
+        border-right: 2px solid black;
+      }
+      h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #1f194c;
+        margin: 1em 0;
+      }
+      p {
+        color: #575a7b;
+        font-size: 15px;
+        line-height: 1.6;
+        letter-spacing: 0.03em;
+      }
+      .icon-wrapper {
+        background-color: #2c7bfe;
+        position: relative;
+        margin: auto;
+        font-size: 30px;
+        height: 2.5em;
+        width: 2.5em;
+        color: #ffffff;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        transition: 0.5s;
+      }
+      .card:hover {
+        background-position: 0 100%;
+      }
+      .card:hover .icon-wrapper {
+        background-color: #ffffff;
+        color: #2c7bfe;
+      }
+      .card:hover h3 {
+        color: #ffffff;
+      }
+      .card:hover p {
+        color: #f0f0f0;
+      }
+      @media screen and (min-width: 768px) {
+        section {
+          padding: 0 2em;
+        }
+        .column {
+          flex: 0 50%;
+          max-width: 50%;
+        }
+      }
+      @media screen and (min-width: 992px) {
+        section {
+          padding: 1em 3em;
+        }
+        .column {
+          flex: 0 0 33.33%;
+          max-width: 33.33%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <h1><i class="fas fa-tools"></i> Services</h1>
+    </div>
+    <section>
+      <div class="row">
+        <div class="column">
+          <div class="card">
+            <div class="icon-wrapper"><i class="fa-solid fa-person"></i></div>
+            <h3>Seller-Customer Interaction</h3>
+            <p>
+              Foster seamless communication through live chat support,
+              personalized recommendations, and responsive customer service
+              channels for enhanced engagement.
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card">
+            <div class="icon-wrapper"><i class="fa-solid fa-shield"></i></div>
+            <h3>Security</h3>
+            <p>
+              Implement robust encryption, secure payment gateways, and regular
+              security audits to safeguard customer data and prevent
+              unauthorized access.
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card">
+            <div class="icon-wrapper">
+              <i class="fa-solid fa-money-check-dollar"></i>
+            </div>
+            <h3>Profit Maximization</h3>
+            <p>
+              Utilize data analytics to optimize pricing strategies, identify
+              high-demand products, and target marketing efforts for increased
+              sales and profitability.
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card">
+            <div class="icon-wrapper"><i class="fa-solid fa-business-time"></i></i></div>
+            <h3>Business Improvement</h3>
+            <p>
+              Continuously analyze performance metrics, gather customer
+              feedback, and implement iterative improvements to enhance
+              operational efficiency and drive business growth.
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card">
+            <div class="icon-wrapper"><i class="fa-brands fa-instagram"></i></div>
+            <h3>Social Media Integration</h3>
+            <p>
+                Integrate social media platforms for marketing, advertising, and customer engagement,
+                 leveraging user-generated content and influencer partnerships to enhance brand visibility
+                 and reputation.
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card">
+            <div class="icon-wrapper"><i class="fa-solid fa-comment"></i></div>
+            <h3>Feedback Mechanisms</h3>
+            <p>
+                Offer easy-to-use feedback forms and ratings systems to gather valuable
+                 insights from customers, driving continuous improvement and customer satisfaction.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

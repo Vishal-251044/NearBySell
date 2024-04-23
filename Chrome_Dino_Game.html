@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Chrome Dino Game</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+      <style>
+        :root {
+  --txt-primary: #535353;
+  --txt-hover: #292929;
+  --background: #F7F7F7;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Press Start 2P', cursive;
+  color: var(--txt-primary);
+  background-color: var(--background);
+  margin: 0;
+}
+
+.game {
+  position: relative;
+  width: 600px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.score {
+  position: absolute;
+  right: 5vmin;
+  top: 1vmin;
+  font-size: .8rem;
+}
+
+.start-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: .8rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.gameover-message {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: .8rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.gameover-message p {
+  letter-spacing: .5em;
+}
+
+.gameover-message span {
+  font-size: .6rem;
+  text-transform: none;
+}
+
+.ground {
+  --left: 0;
+  width: 300%;
+  position: absolute;
+  bottom: 0;
+  left: calc(var(--left) * 1%);
+}
+
+.dino {
+  --bottom: 0;
+  height: 30%;
+  position: absolute;
+  left: 1%;
+  bottom: calc(var(--bottom) * 1%);
+}
+
+.cactus {
+  height: 30%;
+  position: absolute;
+  bottom: 0;
+  left: calc(var(--left) * 1%);
+}
+
+.hide {
+  display: none;
+}
+      </style>
+   </head>
+   <body>
+      <div id="game" class="game">
+         <div id="score" class="score">0</div>
+         <div id="start-message" class="start-message">Press any key to start</div>
+         <img src="ground.png" class="ground">
+         <img src="ground.png" class="ground">
+         <img src="dino-stationary.png" id="dino" class="dino">
+         <div id="gameover-message" class="gameover-message hide">
+            <p>Game over</p>
+            <span>Press any key to restart</span>
+         </div>
+      </div>
+      <script>
+        const SPEED_SCALE = 0.00001;
+
+const game = document.querySelector("#game");
+const scoreDisplay = document.querySelector("#score");
+const startMessage = document.querySelector("#start-message");
+const gameoverMessage = document.querySelector("#gameover-message");
+
+document.addEventListener("keydown", startGame, { once: true });
+
+/* general variables */
+let lastTime;
+let speedScale;
+let score;
+
+/* frame update */
+function update(time) { 
+  if (lastTime == null) {
+    lastTime = time;
+    window.requestAnimationFrame(update);
+    return;
+  }
+
+  const delta = time - lastTime;
+
+  updateGround(delta, speedScale);
+  updateDino(delta, speedScale);
+  updateCactus(delta, speedScale);
+  updateSpeedScale(delta);
+  updateScore(delta);
+
+  if (checkGameOver()) return handleGameOver();
+
+  lastTime = time;
+  window.requestAnimationFrame(update);
+}
+
+function startGame() {
+  lastTime = null;
+  speedScale = 1;
+  score = 0;
+  setupGround();
+  setupDino();
+  setupCactus();
+  startMessage.classList.add("hide");
+  gameoverMessage.classList.add("hide");
+  window.requestAnimationFrame(update);
+}
+
+/* speeds up the game over time */
+function updateSpeedScale(delta) { 
+  speedScale += delta * SPEED_SCALE;
+}
+
+function updateScore(delta) {
+  score += delta * 0.01; 
+  scoreDisplay.textContent = Math.floor(score);
+}
+
+/* collision conditions */
+function checkCollision(rect1, rect2) {
+  return (
+    rect1.left < rect2.right &&
+    rect1.top < rect2.bottom &&
+    rect1.right > rect2.left &&
+    rect1.bottom > rect2.top
+  );
+}
+
+function checkGameOver() {
+  const dinoRect = getDinoRect();
+  return getCactusRects().some(rect => checkCollision(rect, dinoRect)); /* check collision with any of the cactus */
+}
+
+function handleGameOver() {
+  setDinoLose();
+  setTimeout(() => {
+    document.addEventListener("keydown", startGame, { once: true }); /* prevents accidental click */
+    gameoverMessage.classList.remove("hide");
+  }, 100);
+}
+
+
+
+
+/* HANDLING CSS PROPERTIES */
+
+/* get property value */
+function getCustomProperty(elem, prop) {
+  return parseFloat(getComputedStyle(elem).getPropertyValue(prop)) || 0;
+}
+
+/* set property value */
+function setCustomProperty(elem, prop, value) {
+  elem.style.setProperty(prop, value);
+}
+
+/* increment the property value */
+function incrementCustomProperty(elem, prop, inc) {
+  setCustomProperty(elem, prop, getCustomProperty(elem, prop) + inc);
+}
+
+
+/* GROUND MOVEMENT */
+
+const GROUND_SPEED = 0.05;
+const grounds = document.querySelectorAll(".ground");
+
+function setupGround() {
+  setCustomProperty(grounds[0], "--left", 0);
+  setCustomProperty(grounds[1], "--left", 300);
+}
+
+function updateGround(delta, speedScale) {
+  grounds.forEach(ground => {
+    incrementCustomProperty(ground, "--left", delta * speedScale * GROUND_SPEED * -1); /* moves the ground according to game speed */
+
+    if (getCustomProperty(ground, "--left") <= -300) {
+      incrementCustomProperty(ground, "--left", 600); /* loop the elements */
+    }
+  });
+}
+
+/* DINOSAUR MOVEMENT */
+
+const dino = document.querySelector("#dino");
+const JUMP_SPEED = 0.45;
+const GRAVITY = 0.0015;
+const DINO_FRAME_COUNT = 2;
+const FRAME_TIME = 100;
+
+let isJumping;
+let dinoFrame;
+let currentFrameTime;
+let yVelocity;
+
+function setupDino() {
+  isJumping = false;
+  dinoFrame = 0;
+  currentFrameTime = 0;
+  yVelocity = 0;
+
+  setCustomProperty(dino, "--bottom", 0);
+  document.removeEventListener("keydown", onJump); /* reset the dinosaur if the player dies while jumping */
+  document.addEventListener("keydown", onJump);
+}
+
+function updateDino(delta, speedScale) {
+  handleRun(delta, speedScale);
+  handleJump(delta);
+}
+
+function getDinoRect() {
+  return dino.getBoundingClientRect(); /* get the dinosaur hitbox */
+}
+
+function setDinoLose() {
+  dino.src = "dino-lose.png";
+}
+
+function handleRun(delta, speedScale) {
+  if (isJumping) {
+    dino.src = `dino-stationary.png`;
+    return;
+  }
+
+  if (currentFrameTime >= FRAME_TIME) {
+    dinoFrame = (dinoFrame + 1) % DINO_FRAME_COUNT;
+    dino.src = `dino-run-${dinoFrame}.png`; /* switch between images to simulate movement */
+    currentFrameTime -= FRAME_TIME;
+  }
+  currentFrameTime += delta * speedScale;
+}
+
+function handleJump(delta) {
+  if (!isJumping) return;
+
+  incrementCustomProperty(dino, "--bottom", yVelocity * delta);
+
+  if (getCustomProperty(dino, "--bottom") <= 0) {
+    setCustomProperty(dino, "--bottom", 0);
+    isJumping = false;
+  }
+
+  yVelocity -= GRAVITY * delta;
+}
+
+function onJump(e) {
+  if (e.code !== "Space" || isJumping) return;
+
+  yVelocity = JUMP_SPEED;
+  isJumping = true;
+}
+
+/* ADD CACTUS */
+
+const CACTUS_SPEED = 0.05;
+const CACTUS_INTERVAL_MIN = 500;
+const CACTUS_INTERVAL_MAX = 2000;
+
+let nextCactusTime;
+
+function setupCactus() {
+  nextCactusTime = CACTUS_INTERVAL_MIN;
+  document.querySelectorAll(".cactus").forEach(cactus => {
+    cactus.remove(); /* remove cactus when game restart */
+  })
+}
+
+function updateCactus(delta, speedScale) {
+  document.querySelectorAll(".cactus").forEach(cactus => {
+    incrementCustomProperty(cactus, "--left", delta * speedScale * CACTUS_SPEED * -1);
+    if (getCustomProperty(cactus, "--left") <= -100) {
+      cactus.remove(); /* remove cactus off screen so it doesn't impair game performance */
+    }
+  })
+
+  if (nextCactusTime <= 0) {
+    createCactus();
+    nextCactusTime =
+      randomizer(CACTUS_INTERVAL_MIN, CACTUS_INTERVAL_MAX) / speedScale;
+  }
+  nextCactusTime -= delta;
+}
+
+function getCactusRects() {
+  return [...document.querySelectorAll(".cactus")].map(cactus => {
+    return cactus.getBoundingClientRect(); /* get the hitbox of all the cactus on the screen */
+  })
+}
+
+function createCactus() {
+  const cactus = document.createElement("img");
+  cactus.src = "cactus.png";
+  cactus.classList.add("cactus");
+  setCustomProperty(cactus, "--left", 100);
+  game.append(cactus); 
+}
+
+function randomizer(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min); /* choose a number between minimum and maximum */
+}
+      </script>
+   </body>
+</html>

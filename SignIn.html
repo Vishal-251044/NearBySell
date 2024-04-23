@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+    font-family: Arial, sans-serif;
+    background-image: url(b8.jpg);
+    background-size: cover;
+    background-position: center; 
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+      #create-account-form {
+        background-color: rgba(235, 221, 74, 0.7);
+        padding: 20px;
+        margin-top: 40px;
+        border-radius: 10px;
+        border: 3px solid black;
+        max-width: 400px;
+        width: 100%;
+        height: calc(100vh - 140px); /* Adjusted height */
+        overflow-y: auto;
+      }
+
+      ::-webkit-scrollbar {
+    width: 12px; 
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 10px;
+    border: 3px solid black; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: black; 
+}
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="tel"],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        border: 2px solid black;
+      }
+
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .form-group#sellerFields {
+        display: none;
+      }
+
+      button {
+        padding: 10px;
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #000000;
+      }
+
+      button:hover {
+        background-color: #0255ae;
+      }
+
+      button[type="submit"] {
+        margin-bottom: 15px;
+      }
+
+      h2 {
+        margin-bottom: 10px;
+      }
+
+      @media screen and (max-width: 768px) {
+        #create-account-form {
+          margin: 10px; 
+        height: calc(100vh - 180px); 
+        }
+
+        body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #fffdfd, #c05fc5);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      } 
+
+      }
+    </style>
+  </head>
+  <body>
+    <div id="create-account-form">
+      <h2><b>Create Account</b></h2>
+
+      <form action="store_data.php" method="post">
+        <div class="form-group">
+          <label for="accountType">Account Type:</label>
+          <select
+            id="accountType"
+            name="accountType"
+            onchange="showAccountFields()"
+          >
+            <option value="customer">Customer</option>
+            <option value="seller">Seller</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="mobile">Mobile Number:</label>
+          <input type="tel" id="mobile" name="mobile" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="location">Location:</label>
+          <input type="text" id="location" name="location" required />
+        </div>
+        <div class="form-group">
+          <label for="address">Address:</label>
+          <textarea id="address" name="address" rows="3" required></textarea>
+        </div>
+        <div class="form-group" id="sellerFields">
+          <label for="upi">UPI ID:</label>
+          <input type="text" id="upi" name="upi" />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit" class="btn" name="create_account">
+          Create Account
+        </button>
+      </form>
+    </div>
+
+    <script>
+      function showAccountFields() {
+        var accountType = document.getElementById("accountType").value;
+        var sellerFields = document.getElementById("sellerFields");
+
+        if (accountType === "seller") {
+          sellerFields.style.display = "block";
+        } else {
+          sellerFields.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gift Cards</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #fffdfd, #5cd7dd);
+      overflow-y: auto;
+      }
+
+      ::-webkit-scrollbar {
+        width: 15px; /* Set the width of the scrollbar */
+      }
+
+      /* Track styles */
+      ::-webkit-scrollbar-track {
+        background: #ba06f6;
+        border: 2px solid black;
+        border-radius: 5px;
+      }
+
+      /* Handle styles */
+      ::-webkit-scrollbar-thumb {
+        background-color: #888; /* Color of the scrollbar handle */
+        border-radius: 6px; /* Rounded corners for the scrollbar handle */
+        border: 3px solid black; /* Border around the scrollbar handle */
+      }
+
+      /* On hover, pointer style for the scrollbar handle */
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: blue; /* Change color on hover */
+      }
+
+    .navbar {
+      background-color: #00caf7;
+      color: #fff;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid black;
+    }
+    .navbar h1 {
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+    }
+    .navbar i {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 20px;
+    }
+    .box {
+      width: calc(33.33% - 20px); /* Three boxes per row */
+      margin-bottom: 20px;
+      background-color: #fff;  
+      border: 2px solid black; 
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .box img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .box h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .download-btn {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #00caf7;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .download-btn:hover {
+      background-color: #009ad6;
+    }
+    @media (max-width: 768px) {
+      .navbar h1 {
+        font-size: 20px;
+      }
+      .box {
+        width: calc(50% - 20px); /* Two boxes per row on smaller screens */
+      }
+    }
+    @media (max-width: 480px) {
+      .box {
+        width: calc(100% - 20px); /* One box per row on even smaller screens */
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <h1><i class="fa-solid fa-gift"></i> Gift Cards</h1>
+    </div>
+  </header>
+  <main>
+   
+    <div class="box">
+      <img src="5.png" alt="Image 1">
+      <h2>Happy Ugadi</h2>
+      <a href="5.png" download="Image1.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+    </div>
+  
+    <div class="box">
+      <img src="6.png" alt="Image 2">
+      <h2>Merry Christmas</h2>
+      <a href="6.png" download="Image2.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+    </div>
+
+    <div class="box">
+        <img src="7.png" alt="Image 3">
+        <h2>Happy Pongal</h2>
+        <a href="7.png" download="Image3.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="8.png" alt="Image 4">
+        <h2>Happy Easter</h2>
+        <a href="8.png" download="Image4.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="9.png" alt="Image 5">
+        <h2>My Idol</h2>
+        <a href="9.png" download="Image5.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="10.png" alt="Image 6">
+        <h2>Special Token</h2>
+        <a href="10.png" download="Image6.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="11.png" alt="Image 7">
+        <h2>Thank You</h2>
+        <a href="11.png" download="Image7.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="12.png" alt="Image 8">
+        <h2>Happy Anniversary</h2>
+        <a href="12.png" download="Image8.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="13.png" alt="Image 9">
+        <h2>Ramadan Mubarak</h2>
+        <a href="13.png" download="Image9.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="14.png" alt="Image 10">
+        <h2>Congratulations</h2>
+        <a href="14.png" download="Image10.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="15.png" alt="Image 11">
+        <h2>Happy Karva Chauth</h2>
+        <a href="15.png" download="Image11.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="16.png" alt="Image 12">
+        <h2>For My Friend</h2>
+        <a href="16.png" download="Image12.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="17.png" alt="Image 13">
+        <h2>Happy Diwali</h2>
+        <a href="17.png" download="Image13.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="18.png" alt="Image 14">
+        <h2>Second Parents</h2>
+        <a href="18.png" download="Image14.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="19.jpg" alt="Image 15">
+        <h2>Happy Birthday</h2>
+        <a href="19.jpg" download="Image15.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="20.png" alt="Image 16">
+        <h2>Happy Bhai Dooj</h2>
+        <a href="20.png" download="Image16.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="21.png" alt="Image 17">
+        <h2>Awesome Maa</h2>
+        <a href="21.png" download="Image17.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="22.png" alt="Image 18">
+        <h2>Apple of My Eye</h2>
+        <a href="22.png" download="Image18.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="23.png" alt="Image 19">
+        <h2>Good Luck</h2>
+        <a href="23.png" download="Image19.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="24.png" alt="Image 20">
+        <h2>Best Wishes</h2>
+        <a href="24.png" download="Image20.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="25.jpg" alt="Image 21">
+        <h2>Welcome</h2>
+        <a href="25.jpg" download="Image21.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="26.png" alt="Image 22">
+        <h2>Happy Wedding</h2>
+        <a href="26.png" download="Image22.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="27.png" alt="Image 23">
+        <h2>Happy Onam</h2>
+        <a href="27.png" download="Image23.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="28.png" alt="Image 24">
+        <h2>Happy Friendship Day</h2>
+        <a href="28.png" download="Image24.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="29.png" alt="Image 25">
+        <h2>Happy Navratri</h2>
+        <a href="29.png" download="Image25.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="30.png" alt="Image 26">
+        <h2>To My True Love</h2>
+        <a href="30.png" download="Image26.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="31.gif" alt="Image 27">
+        <h2>Happy Father's Day</h2>
+        <a href="31.gif" download="Image27.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="32.png" alt="Image 28">
+        <h2>Happy Raksha Bandhan</h2>
+        <a href="32.png" download="Image28.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="33.jpg" alt="Image 29">
+        <h2>Name 2</h2>
+        <a href="33.jpg" download="Image29.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+
+      <div class="box">
+        <img src="34.png" alt="Image 30">
+        <h2>Happy Durga Puja</h2>
+        <a href="34.png" download="Image30.png" class="download-btn"><i class="fas fa-download"></i> Download</a>
+      </div>
+   
+  </main>
+</body>
+</html>
