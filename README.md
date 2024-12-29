@@ -8,7 +8,8 @@
 ---
 
 ## 🔧 Technologies Used  
-- **Frontend**: HTML, CSS, JavaScript for creating an intuitive and responsive interface.  
+- **Frontend**: HTML, CSS, JavaScript for creating an intuitive and responsive interface.
+   **Backend**: PHP for server-side logic.
 - **Database**: SQL and MongoDB for robust data management.  
 
 ---
